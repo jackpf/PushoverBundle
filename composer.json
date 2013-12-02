@@ -1,0 +1,29 @@
+{
+    "name": "jackpf/pushover-bundle",
+    "type": "symfony-bundle",
+    "description": "Pushover bundle",
+    "keywords": ["Symfony Pushover Bundle"],
+    "homepage": "https://github.com/jackpf",
+    "license": "",
+    "authors": [
+        {
+            "name": "Jack Farrelly",
+            "homepage": "https://github.com/jackpf"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "require": {
+        "php":                              ">=5.5",
+        "symfony/framework-bundle":         "~2.2",
+        "guzzle/guzzle":                    "*"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-0": {
+           "S40\\PushoverBundle": ""
+        }
+    },
+    "target-dir": "S40/PushoverBundle"
+}
