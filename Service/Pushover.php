@@ -31,6 +31,12 @@ class Pushover
      */
     private $user;
     
+    /**
+     * Constructor
+     * 
+     * @param string $token
+     * @param string $user
+     */
     public function __construct($token, $user)
     {
         $this->token = $token;
@@ -38,23 +44,37 @@ class Pushover
         $this->client = new Client();
     }
     
+    /**
+     * Build post data params
+     * 
+     * @param array $params
+     * @return array
+     */
     private function buildParams(array $params)
     {
-        return array_merge(
+        return http_build_query(array_merge(
     	    $params,
             [
     	       'token'  => $this->token,
                'user'   => $this->user
             ]
-        );
+        ));
     }
     
-    private function send($url, $params)
+    /**
+     * Send a request
+     * 
+     * @param string $url
+     * @param array $params
+     * @return string
+     * @throws PushoverException
+     */
+    private function send($url, array $params)
     { 
         $request = $this->client->post(
             $url,
             [],
-            http_build_query($this->buildParams($params))
+            $this->buildParams($params)
         );
         
         $response = $request->send();
@@ -66,6 +86,14 @@ class Pushover
         return $response->getBody();
     }
     
+    /**
+     * Push a message
+     * 
+     * @param string $title
+     * @param string $message
+     * @param array $params
+     * @return string
+     */
     public function push($title, $message, array $params = [])
     {
         $params['title']    = $title;
